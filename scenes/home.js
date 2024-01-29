@@ -5,7 +5,7 @@ let pos
 scene.setup = function() {
     this.childs = []
     this.bg = [10]
-    pos = new vec2(cx, cy)
+    pos = new vec2(0, 0)
 
 }
 

@@ -1,4 +1,4 @@
-local _url = 'http://127.0.0.1:8081/'
+local _url = 'https://ayo986.github.io/me/'
 local url = _url .. 'res/images/ware/'
 return {
 	{text = "Aldi", expanded = true, id = 100, fileImage = _url ..'res/icons/1.png', imageSize = 30, childs = {}, bg = {10}},

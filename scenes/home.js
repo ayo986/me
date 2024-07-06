@@ -27,7 +27,7 @@ function addElement(node, n){
     }
     o.onChange = function(state) {
         this.node.state = state
-        xsaveJSON(this.vater.nodes, "res.json", true)
+        // xsaveJSON(this.vater.nodes, "res.json", true)
     }
     if (node.childs) {
         o.mousereleased  = function(x, y, b){

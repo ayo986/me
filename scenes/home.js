@@ -1,6 +1,42 @@
 
 let scene = new Scene()
+function getCount(t){
+    let n = 0
+    for (let o of t) {
+        if (o.state) {
+            n++
+        }
+    }
+    return n 
+}
 
+function copyTxt(nodes, n, str, p){
+    n = n || 0
+    p = p || ''
+    str = str || ''
+    let j = 0
+    for (let node of nodes || []) {
+        if (node.childs && getCount(node.childs) > 0) {
+            str = str + '*' + p + '(' + node.text + ')*\r\n'
+        }
+
+        if (node.state) {
+            j++
+            let nr = 16 - node.text.length
+            let hh = ''
+            // if (nr > 0) {
+            //    hh = ' '.repeat(nr)
+            // }
+            str = str + j + '-' + node.text + hh + '\r\n'
+        }
+
+        if (node.childs) {
+           str = copyTxt(node.childs, n + 1, str, node.text)
+        }
+    }
+
+    return str
+}
 function addElement(node, n){
     let mc = new moveClip(0, 0, 10, 10)
     mc.hasBg = false
@@ -25,11 +61,12 @@ function addElement(node, n){
     o.check = function() {
         return !o.vater.moving
     }
-    o.onChange = function(state) {
-        this.node.state = state
-        // xsaveJSON(this.vater.nodes, "res.json", true)
-        navigator.clipboard.writeText('Ahmed Younis');
+    if (node.radio) {
+        o.onChange = function(state) {
+            this.node.state = state
+        }
     }
+
     if (node.childs) {
         o.mousereleased  = function(x, y, b){
             let p = this.vater
@@ -50,20 +87,64 @@ scene.setup = function(){
     let im = lg.loadImage('res/icons/1.png')
 
 
-    let mv = new explorThumb(0, 0, width, height)
-    mv.align = 'left'
-    mv.addElement = addElement
-    mv.bg = [style.bg[0]/2, style.bg[1]/2, style.bg[2]/2]
-    mv.space = 2
-    this.insert(mv)
-    mv.setDisplayItem(14)
-    mv.setIndex(1)
+    let ebar = new explorThumb(0, 0, width, height - 40)
+    ebar.align = 'left'
+    ebar.addElement = addElement
+    ebar.bg = [style.bg[0]/2, style.bg[1]/2, style.bg[2]/2]
+    ebar.space = 2
+    this.insert(ebar)
+    ebar.setDisplayItem(14)
+    ebar.setIndex(1)
 
     loadJson('db.json', function(data) {
         let db = data
-        mv.nodes = data
-        mv.updateData()
+        ebar.nodes = data
+        ebar.updateData()
     })
+
+    let lv = new listView(0, height - 40, width, 40)
+    lv.direction = 'h'
+    lv.bg = [20]
+    lv.space = 0
+    lv.origin = TOP_LEFT
+    this.insert(lv)
+
+    let buttons = [
+        {
+            text: "Copy List", 
+            imageIcon:lg.newImage('res/icons/share.png'),
+            mousepressed: function(x, y, b){
+                this.opacity = 50
+            },
+            mousereleased: function(x, y, b){
+                this.opacity = 100
+                let sRes = copyTxt(ebar.nodes)
+                navigator.clipboard.writeText(sRes + '\r\n' + 'Ahmed Younis');
+                // print(sRes)
+            },
+        },
+        {
+            text: "About", 
+            imageIcon:lg.newImage('res/icons/info.png'), 
+            alignText: "right",
+            mousepressed: function(x, y, b){
+                this.opacity = 50
+            },
+            mousereleased: function(x, y, b){
+                this.opacity = 100
+                alert('Ahmed Younis Elisabethstr.18A 24143 kiel')
+
+            },
+        },
+    ]
+
+    for (let i in buttons) {
+        let b = buttons[i]
+        let o = new Button()
+        o.set(b)
+        lv.addItem(o)
+    }
+    lv.setDisplayItem(2)
 }
 return scene
 

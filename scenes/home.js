@@ -28,6 +28,7 @@ function addElement(node, n){
     o.onChange = function(state) {
         this.node.state = state
         // xsaveJSON(this.vater.nodes, "res.json", true)
+        navigator.clipboard.writeText('Ahmed Younis');
     }
     if (node.childs) {
         o.mousereleased  = function(x, y, b){

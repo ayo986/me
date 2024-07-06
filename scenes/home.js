@@ -120,6 +120,7 @@ scene.setup = function(){
                 this.opacity = 100
                 let sRes = copyTxt(ebar.nodes)
                 navigator.clipboard.writeText(sRes + '\r\n' + 'Ahmed Younis');
+                alert('done')
                 // print(sRes)
             },
         },

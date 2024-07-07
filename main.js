@@ -1,55 +1,107 @@
 
-lg = love.graphics
+myProject = {}
+myProject.images = {}
+myProject.audios = {}
 
-love.load = function () {
-  TOP_LEFT = vec2(0, 0)
-  TOP_CENTER = vec2(0.5, 0)
-  TOP_RIGHT = vec2(1, 0)
-  
-  CENTER_LEFT = vec2(0, 0.5)
-  CENTER_CENTER = vec2(0.5, 0.5)
-  CENTER_RIGHT = vec2(1, 0.5)
-  
-  BUTTOM_LEFT = vec2(0, 1)
-  BUTTOM_CENTER = vec2(0.5, 1)
-  BUTTOM_RIGHT = vec2(1, 1)
-  let [w, h] = lg.getDimensions()
-  width = w
-  height = h
-  cx = w/2
-  cy = h/2
-  gotoScene('scenes/home.js')
+
+function newImage(url) {
+    if (!myProject.images[url]) {
+        let im = loadImage(url)
+        myProject.images[url] = im
+        return im
+    }
+    return myProject.images[url]
 }
 
-love.draw = function () {
-  let [w, h] = lg.getDimensions()
-  width = w
-  height = h
-  cx = w/2
-  cy = h/2
-  lg.setLineWidth(1)
-  lg.setColor(0, 0, 0)
-  scene_master.on_draw()
+function newAudio(url) {
+    if (!myProject.audios[url]) {
+        let au = loadSound(url)
+        myProject.images[url] = au
+        return au
+    }
+    return myProject.audios[url]
 }
 
-love.mousepressed = function(x, y, b){
-  scene_master.on_mousepressed(x, y, b)
+
+function preload(){
+    
 }
 
-love.mousereleased = function(x, y, b){
-  scene_master.on_mousereleased(x, y, b)
+function setup() {
+    ctxcanvas = createCanvas(windowWidth, windowHeight, P2D); //WEBGL 
+    originWidth = width
+    originHeight = height
+    cx = width / 2
+    cy = height / 2
+    TOP_LEFT = vec2(0, 0)
+    TOP_CENTER = vec2(0.5, 0)
+    TOP_RIGHT = vec2(1, 0)
+    
+    CENTER_LEFT = vec2(0, 0.5)
+    CENTER_CENTER = vec2(0.5, 0.5)
+    CENTER_RIGHT = vec2(1, 0.5)
+    
+    BUTTOM_LEFT = vec2(0, 1)
+    BUTTOM_CENTER = vec2(0.5, 1)
+    BUTTOM_RIGHT = vec2(1, 1)
+    CLEAR_GRAPH = true
+    background(0)
+    gotoScene('scenes/home.js')
+}
+// -------------------------------------------------------
+function draw(){
+    cx = width / 2
+    cy = height / 2
+    if(CLEAR_GRAPH){
+        clear()
+        background(0)
+    }
+    
+    Stage_Master.on_draw()
 }
 
-love.mousemoved = function(x, y, dx, dy){
-  scene_master.on_mousemoved(x, y, dx, dy)
+function mousePressed(){
+    let t = ["left", "right", "center"]
+    let b
+    for (let i in t) {
+        if (mouseButton == t[i]) {
+            b = int(i) + 1
+        }
+    }
+    Stage_Master.on_mousepressed(mouseX, mouseY, b)
 }
 
-love.resize = function(w, h){
-  width = w
-  height = h
-  cx = w/2
-  cy = h/2
-  scene_master.on_resize(w, h)
+function mouseReleased(){
+    let t = ["left", "right", "center"]
+    let b
+    for (let i in t) {
+        if (mouseButton == t[i]) {
+            b = int(i) + 1
+        }
+    }
+    Stage_Master.on_mousereleased(mouseX, mouseY, b)   
 }
 
-love.run();
+function mouseDragged(){
+    Stage_Master.on_mousemoved(mouseX, mouseY, pmouseX - mouseX, pmouseY - mouseY)
+}
+
+// function mouseMoved() {
+//  Stage_Master.on_mousemoved(mouseX, mouseY, pmouseX - mouseX, pmouseY - mouseY)
+// }
+// 
+
+function keyPressed(){
+    Stage_Master.on_keypressed(keyCode, key)
+}
+
+function keyReleased(){
+    Stage_Master.on_keyreleased(keyCode, key)
+}
+
+/////
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight)
+
+    Stage_Master.on_resize(windowWidth, windowHeight)
+}

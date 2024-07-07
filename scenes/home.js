@@ -86,7 +86,7 @@ scene.setup = function(){
         ebar.align = 'left'
         ebar.alignText = 'right'
         // ebar.bg = [20]
-        ebar.setDisplayItem(16)
+        ebar.setDisplayItem(4)
         ebar.setIndex(1)
         this.insert(ebar)
         ebar.nodes = data

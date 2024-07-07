@@ -49,7 +49,7 @@ function addElement(node, n){
     o.bg = [itemColor[0] + 20*n, itemColor[1] + 20*n, itemColor[2] + 20*n]
     o.node = node
     o.fontSize = 14
-    o.iconSize  = this.getItemSize()
+    o.iconSize  = this.getItemSize()/2
     o.alignText = this.alignText
     o.corner = [0]
     if (!node.radio) {

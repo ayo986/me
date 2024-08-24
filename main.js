@@ -46,7 +46,7 @@ function setup() {
     BUTTOM_RIGHT = vec2(1, 1)
     CLEAR_GRAPH = true
     background(0)
-    // gotoScene('scenes/home.js')
+    gotoScene('scenes/home.js')
 
 }
 // -------------------------------------------------------

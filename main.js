@@ -47,9 +47,7 @@ function setup() {
     CLEAR_GRAPH = true
     background(0)
     // gotoScene('scenes/home.js')
-    fill(0)
-    text('AHMED YOUNIS XXXXXXXXXXXXX',cx, 100)
-    text(mouseButton, cx, cy)
+
 }
 // -------------------------------------------------------
 function draw(){
@@ -61,6 +59,10 @@ function draw(){
     }
     
     Stage_Master.on_draw()
+
+    fill(255, 0, 0)
+    text('AHMED YOUNIS XXXXXXXXXXXXX',cx, 100)
+    text(mouseButton, cx, cy)
 }
 
 function mousePressed(){

@@ -62,9 +62,10 @@ function draw(){
 
 function mousePressed(){
     let t = ["left", "right", "center"]
+    let tt = [0, 2, 1]
     let b
     for (let i in t) {
-        if (mouseButton == t[i]) {
+        if (mouseButton == t[i] || mouseButton == tt[i]) {
             b = int(i) + 1
         }
     }
@@ -73,9 +74,10 @@ function mousePressed(){
 
 function mouseReleased(){
     let t = ["left", "right", "center"]
+    let tt = [0, 2, 1]
     let b
     for (let i in t) {
-        if (mouseButton == t[i]) {
+        if (mouseButton == t[i] || mouseButton == tt[i]) {
             b = int(i) + 1
         }
     }

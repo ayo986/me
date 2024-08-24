@@ -48,6 +48,7 @@ function setup() {
     background(0)
     // gotoScene('scenes/home.js')
     fill(0)
+    text('AHMED YOUNIS XXXXXXXXXXXXX',cx, 100)
     text(mouseButton, cx, cy)
 }
 // -------------------------------------------------------

@@ -60,9 +60,9 @@ function draw(){
     
     Stage_Master.on_draw()
 
-    fill(255, 0, 0)
-    text('AHMED YOUNIS XXXXXXXXXXXXX',cx, 100)
-    text(valMouse, cx, cy)
+    // fill(255, 0, 0)
+    // text('AHMED YOUNIS XXXXXXXXXXXXX',cx, 100)
+    // text(valMouse, cx, cy)
 }
 
 function mousePressed(){

@@ -26,7 +26,7 @@ function newAudio(url) {
 function preload(){
     
 }
-
+let valMouse = ''
 function setup() {
     ctxcanvas = createCanvas(windowWidth, windowHeight, P2D); //WEBGL 
     originWidth = width
@@ -62,7 +62,7 @@ function draw(){
 
     fill(255, 0, 0)
     text('AHMED YOUNIS XXXXXXXXXXXXX',cx, 100)
-    text(mouseButton, cx, cy)
+    text(valMouse, cx, cy)
 }
 
 function mousePressed(){
@@ -74,6 +74,7 @@ function mousePressed(){
             b = int(i) + 1
         }
     }
+    valMouse = 'pressed ' + mouseButton + ' ' + b
     Stage_Master.on_mousepressed(mouseX, mouseY, b)
 }
 
@@ -86,6 +87,7 @@ function mouseReleased(){
             b = int(i) + 1
         }
     }
+    valMouse = 'Unpressed ' + mouseButton + ' ' + b
     Stage_Master.on_mousereleased(mouseX, mouseY, b)   
 }
 

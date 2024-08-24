@@ -47,6 +47,8 @@ function setup() {
     CLEAR_GRAPH = true
     background(0)
     // gotoScene('scenes/home.js')
+    fill(0)
+    text(mouseButton, cx, cy)
 }
 // -------------------------------------------------------
 function draw(){
